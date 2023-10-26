@@ -1,0 +1,8 @@
+Перед запуском все файлы формата .png нужно перенести в ту же папку, где находится
+main.py и db.db,там уже создать папку img и перенести туда изображения
+
+--------------------------------------------------------------------------------------
+
+Before launching, all .png files need to be moved to the same folder where
+main.py and db.db are located, there you can already create an img folder and transfer the images there
+
