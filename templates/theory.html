@@ -4,6 +4,66 @@
     <meta charset="UTF-8">
     <title>Теория: {{ topic }}</title>
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .theory-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .theory-section h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .formula {
+            background: #f1f3f5;
+            border-left: 4px solid #007bff;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        .example {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        a.btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #343a40;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -11,10 +71,23 @@
     </header>
 
     <main>
-        <div class="theory-card">
-            <p>{{ text }}</p>
+        {% for section, items in content.items() %}
+        <div class="theory-section">
+            <h2>{{ section }}</h2>
+            <ul>
+                {% for item in items %}
+                    {% if 'Пример' in item %}
+                        <div class="example">{{ item }}</div>
+                    {% elif '=' in item or 'Δ' in item %}
+                        <div class="formula">{{ item }}</div>
+                    {% else %}
+                        <li>{{ item }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         </div>
-        <a href="/" class="btn back-btn">На главную</a>
+        {% endfor %}
+        <a href="/" class="btn">На главную</a>
     </main>
 
     <footer>© Alexander Talyagin</footer>
