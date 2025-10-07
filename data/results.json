@@ -1,0 +1,83 @@
+[
+  {
+    "datetime": "2025-10-07T16:50:49",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 7,
+    "total": 15,
+    "percent": 46.67,
+    "grade": 2
+  },
+  {
+    "datetime": "2025-10-07T17:01:54",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 10,
+    "total": 15,
+    "percent": 66.67,
+    "grade": 3
+  },
+  {
+    "datetime": "2025-10-07T17:29:46",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 3,
+    "total": 3,
+    "percent": 100.0,
+    "grade": 5
+  },
+  {
+    "datetime": "2025-10-07T17:35:23",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 1,
+    "total": 15,
+    "percent": 6.67,
+    "grade": 2
+  },
+  {
+    "datetime": "2025-10-07T17:38:23",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 11,
+    "total": 15,
+    "percent": 73.33,
+    "grade": 4
+  },
+  {
+    "datetime": "2025-10-07T18:36:46",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 0,
+    "total": 15,
+    "percent": 0.0,
+    "grade": 2
+  },
+  {
+    "datetime": "2025-10-07T18:37:15",
+    "topic": "Все темы",
+    "level": "Контрольный",
+    "correct": 1,
+    "total": 30,
+    "percent": 3.33,
+    "grade": 2
+  },
+  {
+    "datetime": "2025-10-07T18:47:35",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 0,
+    "total": 15,
+    "percent": 0.0,
+    "grade": 2
+  },
+  {
+    "datetime": "2025-10-07T18:47:45",
+    "topic": "Механика",
+    "level": "Лёгкий",
+    "correct": 1,
+    "total": 15,
+    "percent": 6.67,
+    "grade": 2
+  }
+]

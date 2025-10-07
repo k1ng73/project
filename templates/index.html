@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Тест по физике</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Добро пожаловать в тест по физике!</h1>
+    <p>Выберите действие:</p>
+    <a href="{{ url_for('show_theory') }}" class="btn">📘 Изучить теорию</a>
+    <a href="{{ url_for('test') }}" class="btn">🧠 Пройти тест</a>
+</body>
+</html>
