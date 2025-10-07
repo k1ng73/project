@@ -4,20 +4,33 @@
     <meta charset="UTF-8">
     <title>Physic Quiz</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Physic Quiz</h1>
-        <p>Развивай свои знания по физике интерактивно!</p>
+        <div class="header-container">
+            <h1>Physic Quiz</h1>
+            <p>Увлекательные тесты и теория по физике</p>
+        </div>
     </header>
 
     <main>
-        <div class="menu">
-            <a href="/test/Механика/Лёгкий" class="btn">Механика - Лёгкий</a>
-            <a href="/test/Механика/Средний" class="btn">Механика - Средний</a>
-            <a href="/test/Механика/Сложный" class="btn">Механика - Сложный</a>
-            <a href="/theory/Механика" class="btn">Теория</a>
-        </div>
+        <section class="menu">
+            <div class="card">
+                <h2>Механика</h2>
+                <a href="/test/Механика/Лёгкий" class="btn">Лёгкий</a>
+                <a href="/test/Механика/Средний" class="btn">Средний</a>
+                <a href="/test/Механика/Сложный" class="btn">Сложный</a>
+                <a href="/theory/Механика" class="btn theory-btn">Теория</a>
+            </div>
+            <div class="card">
+                <h2>Электричество</h2>
+                <a href="/test/Электричество/Лёгкий" class="btn">Лёгкий</a>
+                <a href="/test/Электричество/Средний" class="btn">Средний</a>
+                <a href="/test/Электричество/Сложный" class="btn">Сложный</a>
+                <a href="/theory/Электричество" class="btn theory-btn">Теория</a>
+            </div>
+        </section>
     </main>
 
     <footer>© Alexander Talyagin</footer>

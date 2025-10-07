@@ -7,20 +7,25 @@
 </head>
 <body>
     <header>
-        <h1>Тест: {{ topic }} ({{ difficulty }})</h1>
+        <div class="header-container">
+            <h1>{{ topic }} - {{ difficulty }}</h1>
+            <p>Выбери правильный вариант ответа</p>
+        </div>
     </header>
 
     <main>
         <div id="quiz-container"></div>
+
         <div id="controls">
             <button id="prev-btn" class="btn" disabled>Назад</button>
             <button id="next-btn" class="btn">Следующий</button>
         </div>
+
         <div id="result" style="display:none;"></div>
         <a href="/" class="btn back-btn">На главную</a>
     </main>
 
-    <footer>© Alexander Talyagin</footer>
+    <footer>© Alexander Talygin</footer>
 
     <script>
         const questions = {{ questions|tojson }};
@@ -48,11 +53,14 @@
             optionsDiv.className = "options";
             q[1].forEach((opt,i)=>{
                 const label = document.createElement("label");
+                label.className = "option-label";
+
                 const input = document.createElement("input");
                 input.type="radio";
                 input.name="q"+index;
                 input.value=i;
                 if(answers[index]===i) input.checked=true;
+
                 label.appendChild(input);
                 label.append(" "+opt);
                 optionsDiv.appendChild(label);
