@@ -1,16 +1,20 @@
-import os
+from flask import Flask, render_template, request
 import json
 import random
-from flask import Flask, render_template, request, redirect, url_for
+import os
 
 app = Flask(__name__)
 
-# Абсолютный путь к questions.json
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-questions_file = os.path.join(BASE_DIR, "questions.json")
+# Пути к файлам
+QUESTIONS_FILE = os.path.join("data", "questions.json")
+THEORY_FILE = os.path.join("data", "theory.json")
 
-with open(questions_file, "r", encoding="utf-8") as f:
+# Загружаем вопросы и теорию
+with open(QUESTIONS_FILE, "r", encoding="utf-8") as f:
     questions_data = json.load(f)
+
+with open(THEORY_FILE, "r", encoding="utf-8") as f:
+    theory_data = json.load(f)
 
 @app.route("/")
 def index():
@@ -19,19 +23,18 @@ def index():
 
 @app.route("/test/<topic>", methods=["GET", "POST"])
 def test(topic):
-    topic_questions = []
+    if topic not in questions_data:
+        return "Тема не найдена", 404
 
-    for level in questions_data.get(topic, {}):
-        for q in questions_data[topic][level]:
-            topic_questions.append(q)
-
+    level = "Лёгкий"  # Можно позже добавить выбор уровня
+    topic_questions = questions_data[topic][level]
     random.shuffle(topic_questions)
 
     if request.method == "POST":
         score = 0
         for i, q in enumerate(topic_questions):
-            ans = request.form.get(f"q{i}")
-            if ans and int(ans) == q[2]:
+            selected = request.form.get(f"q{i}")
+            if selected is not None and int(selected) == q[2]:
                 score += 1
         return render_template("result.html", score=score, total=len(topic_questions))
 
@@ -39,8 +42,10 @@ def test(topic):
 
 @app.route("/theory/<topic>")
 def theory(topic):
-    # Пока просто заглушка, можно добавить теоретический материал
-    return render_template("theory.html", topic=topic)
+    if topic not in theory_data:
+        return "Тема не найдена", 404
+    content = theory_data[topic]
+    return render_template("theory.html", topic=topic, content=content)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

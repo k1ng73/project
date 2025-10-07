@@ -3,22 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physic Quiz</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Physics Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Дополнительно: анимация и красивое меню */
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .menu select {
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            border: 2px solid #007bff;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .menu select:hover {
+            border-color: #0056b3;
+        }
+
+        .menu button {
+            width: 100%;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between">
-    <div class="container mx-auto p-4">
-        <h1 class="text-4xl font-bold mb-6 text-center">Physic Quiz</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<body>
+<div class="container">
+    <h1>Physics Quiz</h1>
+
+    <div class="menu">
+        <label for="topic">Выберите тему:</label>
+        <select id="topic">
             {% for topic in topics %}
-                <a href="{{ url_for('test', topic=topic) }}" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded text-center">
-                    {{ topic }}
-                </a>
+            <option value="{{ topic }}">{{ topic }}</option>
             {% endfor %}
-        </div>
+        </select>
+
+        <label for="level">Выберите уровень сложности:</label>
+        <select id="level">
+            <option value="Лёгкий">Лёгкий</option>
+            <option value="Средний">Средний</option>
+            <option value="Сложный">Сложный</option>
+        </select>
+
+        <button class="btn" onclick="startTest()">Пройти тест</button>
+        <button class="theory-btn" onclick="viewTheory()">Теория</button>
     </div>
-    <footer class="text-center py-4 text-gray-500">
-        © Alexander Talyagin
-    </footer>
+
+    <footer>© Alexander Talyagin</footer>
+</div>
+
+<script>
+    function startTest() {
+        const topic = document.getElementById('topic').value;
+        const level = document.getElementById('level').value;
+        window.location.href = `/test/${topic}/${level}`;
+    }
+
+    function viewTheory() {
+        const topic = document.getElementById('topic').value;
+        window.location.href = `/theory/${topic}`;
+    }
+</script>
 </body>
 </html>
