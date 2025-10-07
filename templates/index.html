@@ -8,26 +8,18 @@
 <body>
     <header>
         <h1>Physic Quiz</h1>
-        <p>Выберите тему для изучения или тестирования</p>
+        <p>Развивай свои знания по физике интерактивно!</p>
     </header>
 
     <main>
-        <div class="topics">
-            {% for topic in topics %}
-            <div class="topic-card">
-                <h2>{{ topic }}</h2>
-                <div class="buttons">
-                    <a class="btn" href="/test/{{ topic }}/Лёгкий">Лёгкий тест</a>
-                    <a class="btn" href="/test/{{ topic }}/Сложный">Сложный тест</a>
-                    <a class="btn theory" href="/theory/{{ topic }}">Теория</a>
-                </div>
-            </div>
-            {% endfor %}
+        <div class="menu">
+            <a href="/test/Механика/Лёгкий" class="btn">Механика - Лёгкий</a>
+            <a href="/test/Механика/Средний" class="btn">Механика - Средний</a>
+            <a href="/test/Механика/Сложный" class="btn">Механика - Сложный</a>
+            <a href="/theory/Механика" class="btn">Теория</a>
         </div>
     </main>
 
-    <footer>
-        © Alexander Talyagin
-    </footer>
+    <footer>© Alexander Talyagin</footer>
 </body>
 </html>

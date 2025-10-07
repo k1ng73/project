@@ -2,23 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Тест: {{ topic }} ({{ difficulty }})</title>
+    <title>Тест: {{ topic }} - {{ difficulty }}</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <header>
-        <h1>Тест по теме {{ topic }} ({{ difficulty }})</h1>
+        <h1>Тест: {{ topic }} ({{ difficulty }})</h1>
     </header>
 
     <main>
-        <div id="quiz-container">
-            <!-- Вопросы будут динамически добавлены JS -->
-        </div>
+        <div id="quiz-container"></div>
         <div id="controls">
             <button id="prev-btn" class="btn" disabled>Назад</button>
             <button id="next-btn" class="btn">Следующий</button>
         </div>
-        <div id="result" class="question-card" style="display:none;"></div>
+        <div id="result" style="display:none;"></div>
         <a href="/" class="btn back-btn">На главную</a>
     </main>
 
@@ -34,29 +32,29 @@
         const nextBtn = document.getElementById("next-btn");
         const resultDiv = document.getElementById("result");
 
-        function showQuestion(index) {
+        function showQuestion(index){
             container.innerHTML = "";
             const q = questions[index];
+
             const card = document.createElement("div");
             card.className = "question-card";
 
             const questionText = document.createElement("p");
             questionText.className = "question-text";
-            questionText.textContent = `${index + 1}. ${q[0]}`;
+            questionText.textContent = `${index+1}. ${q[0]}`;
             card.appendChild(questionText);
 
             const optionsDiv = document.createElement("div");
             optionsDiv.className = "options";
-
-            q[1].forEach((option, i) => {
+            q[1].forEach((opt,i)=>{
                 const label = document.createElement("label");
                 const input = document.createElement("input");
-                input.type = "radio";
-                input.name = "q" + index;
-                input.value = i;
-                if (answers[index] === i) input.checked = true;
+                input.type="radio";
+                input.name="q"+index;
+                input.value=i;
+                if(answers[index]===i) input.checked=true;
                 label.appendChild(input);
-                label.append(" " + option);
+                label.append(" "+opt);
                 optionsDiv.appendChild(label);
             });
 
@@ -64,27 +62,39 @@
             container.appendChild(card);
 
             prevBtn.disabled = index === 0;
-            nextBtn.textContent = index === questions.length - 1 ? "Завершить" : "Следующий";
+            nextBtn.textContent = index === questions.length-1 ? "Завершить" : "Следующий";
         }
 
-        prevBtn.addEventListener("click", () => {
+        prevBtn.onclick = ()=>{
             saveAnswer();
-            if (currentIndex > 0) {
-                currentIndex--;
-                showQuestion(currentIndex);
-            }
-        });
+            if(currentIndex>0){ currentIndex--; showQuestion(currentIndex);}
+        }
 
-        nextBtn.addEventListener("click", () => {
+        nextBtn.onclick = ()=>{
             saveAnswer();
-            if (currentIndex < questions.length - 1) {
-                currentIndex++;
-                showQuestion(currentIndex);
-            } else {
-                showResult();
-            }
-        });
+            if(currentIndex<questions.length-1){ currentIndex++; showQuestion(currentIndex);}
+            else showResult();
+        }
 
-        function saveAnswer() {
-            const selected = document.querySelector('input[name="q' + currentIndex + '"]:checked');
-            answers[currentIndex] = selected ? parseInt(selected.value) :
+        function saveAnswer(){
+            const selected = document.querySelector('input[name="q'+currentIndex+'"]:checked');
+            answers[currentIndex] = selected ? parseInt(selected.value) : null;
+        }
+
+        function showResult(){
+            container.style.display="none";
+            prevBtn.style.display="none";
+            nextBtn.style.display="none";
+
+            let score=0;
+            questions.forEach((q,i)=>{ if(answers[i]===q[2]) score++; });
+
+            resultDiv.style.display="block";
+            resultDiv.innerHTML=`<h2>Результат</h2>
+                <p>Вы правильно ответили на ${score} из ${questions.length} вопросов</p>`;
+        }
+
+        showQuestion(currentIndex);
+    </script>
+</body>
+</html>
