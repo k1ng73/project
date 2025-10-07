@@ -1,18 +1,12 @@
 {% extends "base.html" %}
-{% block content %}
-<h1 class="text-center mb-5">Выберите тему для изучения</h1>
+{% block title %}Physic Quiz{% endblock %}
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for topic in topics %}
-  <div class="col">
-    <div class="card topic-card shadow-lg border-0">
-      <div class="card-body text-center">
-        <h4 class="card-title mb-3 fw-semibold">{{ topic }}</h4>
-        <a href="{{ url_for('theory', topic=topic) }}" class="btn btn-outline-light w-100 mb-2">📘 Теория</a>
-        <a href="{{ url_for('test', topic=topic) }}" class="btn btn-primary w-100">🧠 Тест</a>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
+{% block content %}
+<h1>Physic Quiz</h1>
+<div class="topics">
+    {% for topic in topics %}
+        <a class="button" href="{{ url_for('test', topic=topic) }}">{{ topic }}</a>
+    {% endfor %}
 </div>
+<a class="button" href="{{ url_for('theory') }}">📘 Теория</a>
 {% endblock %}

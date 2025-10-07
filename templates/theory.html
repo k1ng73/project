@@ -1,8 +1,16 @@
-{% extends "base.html" %}
-{% block content %}
-<a href="/" class="btn btn-outline-light mb-4">← Назад</a>
-<h2 class="mb-4">{{ topic }}</h2>
-<div class="theory-box p-4 rounded shadow-sm">
-  <p>{{ content | safe }}</p>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Теория</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Теоретический материал</h1>
+    <a class="button" href="{{ url_for('index') }}">🏠 Главная</a>
+    <div class="theory">
+        <p>Здесь вы можете разместить всю необходимую теорию по физике, включая формулы, определения и пояснения к темам.</p>
+    </div>
+</body>
+</html>

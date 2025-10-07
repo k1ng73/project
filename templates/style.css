@@ -1,72 +1,44 @@
 body {
-  background: #f8f9fa;
-  color: #212529;
-  font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    margin: 0;
+    padding: 20px;
 }
 
-.navbar {
-  background: linear-gradient(90deg, #5c6bc0, #7e57c2);
+h1 { color: #1e90ff; }
+h2 { color: #333; }
+
+.button, .topic-button, button {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    text-decoration: none;
+    background: #1e90ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
 }
 
-.navbar-brand {
-  color: #fff !important;
+.button:hover, .topic-button:hover, button:hover {
+    background: #0f78d1;
 }
 
-.nav-link {
-  color: #fff !important;
+.question {
+    background: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.nav-link:hover {
-  color: #d1c4e9 !important;
+.questions {
+    max-width: 600px;
+    margin: auto;
 }
 
-.topic-card {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e0e0e0;
-  transition: all 0.3s ease;
-}
-
-.topic-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.theory-box,
-.question-block,
-.result-card {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  color: #212529;
-}
-
-.btn-primary {
-  background-color: #7e57c2;
-  border: none;
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background-color: #6a1b9a;
-  color: #fff;
-}
-
-.btn-outline-light {
-  border-color: #7e57c2;
-  color: #7e57c2;
-}
-
-.btn-outline-light:hover {
-  background-color: #7e57c2;
-  color: #fff;
-}
-
-footer {
-  background: #f1f3f4;
-  color: #555;
-}
-
-.result-card h4 span {
-  color: #6a1b9a;
+.topics {
+    margin-top: 20px;
 }
