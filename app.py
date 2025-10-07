@@ -34,8 +34,10 @@ def test(topic, difficulty):
 
 @app.route("/theory/<topic>")
 def theory(topic):
-    text = theory_data.get(topic, "Теория по этой теме пока не добавлена.")
-    return render_template("theory.html", topic=topic, text=text)
+    content = theory_data.get(topic)
+    if content is None:
+        return "Тема не найдена", 404
+    return render_template("theory.html", topic=topic, content=content)
 
 
 if __name__ == "__main__":
