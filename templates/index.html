@@ -3,72 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Quiz</title>
+    <title>Physic Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        /* Дополнительно: анимация и красивое меню */
-        .menu {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .menu select {
-            padding: 12px 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            border: 2px solid #007bff;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .menu select:hover {
-            border-color: #0056b3;
-        }
-
-        .menu button {
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
-<div class="container">
-    <h1>Physics Quiz</h1>
+    <div class="container">
+        <header>
+            <h1>Physic Quiz</h1>
+            <p class="subtitle">Развивай свои знания по физике с нашим интерактивным приложением</p>
+        </header>
 
-    <div class="menu">
-        <label for="topic">Выберите тему:</label>
-        <select id="topic">
-            {% for topic in topics %}
-            <option value="{{ topic }}">{{ topic }}</option>
-            {% endfor %}
-        </select>
+        <main>
+            <div class="topics">
+                <h2>Выберите тему:</h2>
+                {% for topic in questions_data %}
+                <a href="{{ url_for('topic_levels', topic=topic) }}" class="topic-button">{{ topic }}</a>
+                {% endfor %}
+            </div>
 
-        <label for="level">Выберите уровень сложности:</label>
-        <select id="level">
-            <option value="Лёгкий">Лёгкий</option>
-            <option value="Средний">Средний</option>
-            <option value="Сложный">Сложный</option>
-        </select>
+            <div class="extras">
+                <a href="{{ url_for('theory') }}" class="extra-button">Теория</a>
+                <a href="#" class="extra-button" onclick="alert('Автор: Alexander Talyagin');">© Alexander Talyagin</a>
+            </div>
+        </main>
 
-        <button class="btn" onclick="startTest()">Пройти тест</button>
-        <button class="theory-btn" onclick="viewTheory()">Теория</button>
+        <footer>
+            <p>Physic Quiz &copy; 2025 Alexander Talyagin</p>
+        </footer>
     </div>
-
-    <footer>© Alexander Talyagin</footer>
-</div>
-
-<script>
-    function startTest() {
-        const topic = document.getElementById('topic').value;
-        const level = document.getElementById('level').value;
-        window.location.href = `/test/${topic}/${level}`;
-    }
-
-    function viewTheory() {
-        const topic = document.getElementById('topic').value;
-        window.location.href = `/theory/${topic}`;
-    }
-</script>
 </body>
 </html>
