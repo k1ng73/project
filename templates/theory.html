@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Теория</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Теория - {{ topic }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Теоретический материал</h1>
-    <a class="button" href="{{ url_for('index') }}">🏠 Главная</a>
-    <div class="theory">
-        <p>Здесь вы можете разместить всю необходимую теорию по физике, включая формулы, определения и пояснения к темам.</p>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen justify-between">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-4">{{ topic }} - Теория</h1>
+        <p class="mb-6">Здесь вы можете добавить теоретический материал по выбранной теме.</p>
+        <a href="{{ url_for('test', topic=topic) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded">К тесту</a>
     </div>
+    <footer class="text-center py-4 text-gray-500">
+        © Alexander Talyagin
+    </footer>
 </body>
 </html>

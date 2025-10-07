@@ -1,12 +1,19 @@
-{% extends "base.html" %}
-{% block content %}
-<h2 class="text-center mb-4">Результат по теме «{{ topic }}»</h2>
-<div class="result-card mx-auto text-center p-4 rounded shadow-lg">
-  <h4>Правильных ответов: {{ correct }} / {{ total }}</h4>
-  <h4>Процент: {{ percent }}%</h4>
-  <h4>Оценка: <span class="text-primary">{{ grade }}</span></h4>
-
-  <a href="{{ url_for('test', topic=topic) }}" class="btn btn-outline-light mt-4">🔁 Пройти заново</a>
-  <a href="/" class="btn btn-primary mt-2">🏠 На главную</a>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результат - Physic Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen justify-between">
+    <div class="container mx-auto p-4 text-center">
+        <h1 class="text-3xl font-bold mb-4">Ваш результат</h1>
+        <p class="text-xl mb-6">Вы набрали {{ score }} из {{ total }} баллов</p>
+        <a href="{{ url_for('index') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded">На главную</a>
+    </div>
+    <footer class="text-center py-4 text-gray-500">
+        © Alexander Talyagin
+    </footer>
+</body>
+</html>
