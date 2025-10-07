@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Тест по физике</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>Тест по физике</h1>
-    <form method="POST">
-        {% for q in questions %}
-            <div class="question">
-                <p><b>{{ loop.index }}. {{ q.question }}</b></p>
-                {% for option in q.answers %}
-                    <label><input type="radio" name="q{{ loop.index0 }}" value="{{ option }}"> {{ option }}</label><br>
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <button type="submit" class="btn">Отправить</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<a href="/" class="btn btn-outline-light mb-4">← Назад</a>
+<h2 class="mb-4">{{ topic }} — тест</h2>
+<form action="{{ url_for('check') }}" method="POST">
+  <input type="hidden" name="topic" value="{{ topic }}">
+  {% for q in questions %}
+  <div class="question-block p-4 mb-4 rounded shadow-sm">
+    <p class="fw-semibold">{{ loop.index }}. {{ q.question }}</p>
+    {% for opt in q.options %}
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q{{ loop.index0 }}" value="{{ opt }}" id="q{{ loop.index0 }}_{{ loop.index }}">
+      <label class="form-check-label" for="q{{ loop.index0 }}_{{ loop.index }}">{{ opt }}</label>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <button type="submit" class="btn btn-success btn-lg w-100 mt-3">Проверить результаты</button>
+</form>
+{% endblock %}

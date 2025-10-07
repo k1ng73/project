@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Теория по физике</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>Теоретические материалы</h1>
-    {% for topic, text in theory.items() %}
-        <h2>{{ topic }}</h2>
-        <p>{{ text }}</p>
-    {% endfor %}
-    <a href="{{ url_for('index') }}" class="btn">🏠 На главную</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<a href="/" class="btn btn-outline-light mb-4">← Назад</a>
+<h2 class="mb-4">{{ topic }}</h2>
+<div class="theory-box p-4 rounded shadow-sm">
+  <p>{{ content | safe }}</p>
+</div>
+{% endblock %}
