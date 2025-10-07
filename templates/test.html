@@ -2,27 +2,89 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Тест по {{ topic }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Тест: {{ topic }} ({{ difficulty }})</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<div class="container">
-    <h1>Тест по теме: {{ topic }}</h1>
-    <form method="post">
-    {% for i, q in enumerate(questions) %}
-        <div class="question">
-            <p>{{ i+1 }}. {{ q[0] }}</p>
-            {% for j, option in enumerate(q[1]) %}
-                <label>
-                    <input type="radio" name="q{{ i }}" value="{{ j }}" required> {{ option }}
-                </label><br>
-            {% endfor %}
+    <header>
+        <h1>Тест по теме {{ topic }} ({{ difficulty }})</h1>
+    </header>
+
+    <main>
+        <div id="quiz-container">
+            <!-- Вопросы будут динамически добавлены JS -->
         </div>
-    {% endfor %}
-        <button type="submit" class="btn">Отправить</button>
-    </form>
-    <a href="{{ url_for('index') }}" class="btn">На главную</a>
-</div>
-<footer>© Alexander Talyagin</footer>
-</body>
-</html>
+        <div id="controls">
+            <button id="prev-btn" class="btn" disabled>Назад</button>
+            <button id="next-btn" class="btn">Следующий</button>
+        </div>
+        <div id="result" class="question-card" style="display:none;"></div>
+        <a href="/" class="btn back-btn">На главную</a>
+    </main>
+
+    <footer>© Alexander Talyagin</footer>
+
+    <script>
+        const questions = {{ questions|tojson }};
+        let currentIndex = 0;
+        const answers = [];
+
+        const container = document.getElementById("quiz-container");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const resultDiv = document.getElementById("result");
+
+        function showQuestion(index) {
+            container.innerHTML = "";
+            const q = questions[index];
+            const card = document.createElement("div");
+            card.className = "question-card";
+
+            const questionText = document.createElement("p");
+            questionText.className = "question-text";
+            questionText.textContent = `${index + 1}. ${q[0]}`;
+            card.appendChild(questionText);
+
+            const optionsDiv = document.createElement("div");
+            optionsDiv.className = "options";
+
+            q[1].forEach((option, i) => {
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = "q" + index;
+                input.value = i;
+                if (answers[index] === i) input.checked = true;
+                label.appendChild(input);
+                label.append(" " + option);
+                optionsDiv.appendChild(label);
+            });
+
+            card.appendChild(optionsDiv);
+            container.appendChild(card);
+
+            prevBtn.disabled = index === 0;
+            nextBtn.textContent = index === questions.length - 1 ? "Завершить" : "Следующий";
+        }
+
+        prevBtn.addEventListener("click", () => {
+            saveAnswer();
+            if (currentIndex > 0) {
+                currentIndex--;
+                showQuestion(currentIndex);
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            saveAnswer();
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                showQuestion(currentIndex);
+            } else {
+                showResult();
+            }
+        });
+
+        function saveAnswer() {
+            const selected = document.querySelector('input[name="q' + currentIndex + '"]:checked');
+            answers[currentIndex] = selected ? parseInt(selected.value) :

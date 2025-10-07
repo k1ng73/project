@@ -2,15 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Теория - {{ topic }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Теория: {{ topic }}</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<div class="container">
-    <h1>Теория по теме: {{ topic }}</h1>
-    <p>{{ content }}</p>
-    <a href="{{ url_for('index') }}" class="btn">На главную</a>
-</div>
-<footer>© Alexander Talyagin</footer>
+    <header>
+        <h1>Теория по теме {{ topic }}</h1>
+    </header>
+
+    <main>
+        <div class="theory-card">
+            <p>{{ text }}</p>
+        </div>
+        <a href="/" class="btn back-btn">На главную</a>
+    </main>
+
+    <footer>© Alexander Talyagin</footer>
 </body>
 </html>

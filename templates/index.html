@@ -2,34 +2,32 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physic Quiz</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Physic Quiz</h1>
-            <p class="subtitle">Развивай свои знания по физике с нашим интерактивным приложением</p>
-        </header>
+    <header>
+        <h1>Physic Quiz</h1>
+        <p>Выберите тему для изучения или тестирования</p>
+    </header>
 
-        <main>
-            <div class="topics">
-                <h2>Выберите тему:</h2>
-                {% for topic in questions_data %}
-                <a href="{{ url_for('topic_levels', topic=topic) }}" class="topic-button">{{ topic }}</a>
-                {% endfor %}
+    <main>
+        <div class="topics">
+            {% for topic in topics %}
+            <div class="topic-card">
+                <h2>{{ topic }}</h2>
+                <div class="buttons">
+                    <a class="btn" href="/test/{{ topic }}/Лёгкий">Лёгкий тест</a>
+                    <a class="btn" href="/test/{{ topic }}/Сложный">Сложный тест</a>
+                    <a class="btn theory" href="/theory/{{ topic }}">Теория</a>
+                </div>
             </div>
+            {% endfor %}
+        </div>
+    </main>
 
-            <div class="extras">
-                <a href="{{ url_for('theory') }}" class="extra-button">Теория</a>
-                <a href="#" class="extra-button" onclick="alert('Автор: Alexander Talyagin');">© Alexander Talyagin</a>
-            </div>
-        </main>
-
-        <footer>
-            <p>Physic Quiz &copy; 2025 Alexander Talyagin</p>
-        </footer>
-    </div>
+    <footer>
+        © Alexander Talyagin
+    </footer>
 </body>
 </html>
